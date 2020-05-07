@@ -1,0 +1,23 @@
+<html>
+<body>
+<h1>Market Watchlist</h1>
+
+  <table border="1" class="dataframe">
+      <thead>
+          <tr>
+              <th>Name</th>
+              <th>Down from 52w High</th>
+  	      </tr>
+      </thead>
+      {% for stock in data %}
+      <tbody>
+          <tr>
+              <td align="left">{{stock.stock_name}}</td>
+              <td align="left">{{stock.down_from_52w_high}}</td>
+          </tr>
+      </tbody>
+      {% endfor %}
+  </table>
+
+</body>
+</html>
