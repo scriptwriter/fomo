@@ -12,7 +12,9 @@ import sys
 # download cookies.txt using the chrome browser plugin
 CREDS='credentials.txt'
 INDIA_URL = 'https://www.screener.in/screens/157004/52-Week-Highs/'
+USA_URL = 'https://in.tradingview.com/markets/stocks-usa/highs-and-lows-52wk-high/'
 WATCHLIST_LOC = '/tmp/watchlist.txt'
+USA_WATCHLIST_LOC = '/tmp/watchlist_usa.txt'
 S3_BUCKET = 'umarye.com'
 INDEX_PAGE_LOC = '/tmp/index.html'
 
@@ -42,17 +44,46 @@ else:
 
 
 stocks = []
+stocks_usa = []
+etfs = []
 
 for item in items:
     elements = item.findAll('td')
     if len(elements) > 0:
         stock_name = elements[1].text.strip()
+        market_cap = elements[3].text.strip()
+        curr_price = elements[2].text.strip()
         down_from_52w_high = elements[13].text.strip()
-        an_item = dict(stock_name=stock_name,down_from_52w_high=down_from_52w_high)
+        an_item = dict(stock_name=stock_name,market_cap=market_cap,curr_price=curr_price,down_from_52w_high=down_from_52w_high)
         stocks.append(an_item)
 
-print stocks
-html = template.render(data=stocks)
+
+BASH_CMD = 'curl -s --cookie /Users/amit/Downloads/cookies.txt ' + USA_URL + '>' + USA_WATCHLIST_LOC
+os.system(BASH_CMD)
+soup = BeautifulSoup(open(USA_WATCHLIST_LOC), "lxml")
+items = soup.findAll('tr')
+if len(items) > 0:
+    items.pop(0)
+else:
+    print("Its time to download the cookies again.")
+    sys.exit(0)
+
+
+for item in items:
+    elements = item.findAll('td')
+    tickr =elements[0].find('a').contents[0].strip()
+    stock_name = elements[0].find('span').contents[0].strip()
+    stock_price = elements[1].contents[0].strip()
+    an_item = dict(stock_name=stock_name,tickr=tickr,stock_price=stock_price)
+
+    if 'ETF' in stock_name:
+        etfs.append(an_item)
+    else:
+        stocks_usa.append(an_item)
+
+    
+
+html = template.render(data1=stocks,data2=stocks_usa,data3=etfs)
 with open(INDEX_PAGE_LOC, 'w') as fh:
     fh.write(html)
 

@@ -1,19 +1,68 @@
 <html>
 <body>
-<h1>Market Watchlist</h1>
-
+  <h1>India Watchlist</h1>
   <table border="1" class="dataframe">
       <thead>
           <tr>
               <th>Name</th>
-              <th>Down from 52w High</th>
+              <th># Market Cap #</th>
+              <th># Curr Price #</th>
+              <th># From 52wH #</th>
   	      </tr>
       </thead>
-      {% for stock in data %}
+      {% for stock in data1 %}
       <tbody>
           <tr>
               <td align="left">{{stock.stock_name}}</td>
-              <td align="left">{{stock.down_from_52w_high}}</td>
+              <td align="center">{{stock.market_cap}}</td>
+              <td align="center">{{stock.curr_price}}</td>
+              <td align="center">{{stock.down_from_52w_high}}</td>
+          </tr>
+      </tbody>
+      {% endfor %}
+  </table>
+  </br>
+  </br>
+  </br>
+
+  <h1>USA Watchlist</h1>
+  <table border="1" class="dataframe">
+      <thead>
+          <tr>
+              <th>Tickr</th>
+              <th>Name</th>
+              <th>Curr Price</th>
+  	      </tr>
+      </thead>
+      {% for stock in data2 %}
+      <tbody>
+          <tr>
+              <td align="left">{{stock.tickr}}</td>
+              <td align="center">{{stock.stock_name}}</td>
+              <td align="left">{{stock.stock_price}}</td>
+          </tr>
+      </tbody>
+      {% endfor %}
+  </table>
+  </br>
+  </br>
+  </br>
+
+  <h1>ETF's Watchlist</h1>
+  <table border="1" class="dataframe">
+      <thead>
+          <tr>
+              <th>Tickr</th>
+              <th>Name</th>
+              <th>Curr Price</th>
+  	      </tr>
+      </thead>
+      {% for stock in data3 %}
+      <tbody>
+          <tr>
+              <td align="left">{{stock.tickr}}</td>
+              <td align="center">{{stock.stock_name}}</td>
+              <td align="left">{{stock.stock_price}}</td>
           </tr>
       </tbody>
       {% endfor %}
