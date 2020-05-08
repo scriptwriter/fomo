@@ -47,15 +47,19 @@ stocks = []
 stocks_usa = []
 etfs = []
 
+with open('ignore.txt', 'r') as f:
+    blacklist = f.read().splitlines() 
+
 for item in items:
     elements = item.findAll('td')
     if len(elements) > 0:
         stock_name = elements[1].text.strip()
-        market_cap = elements[3].text.strip()
-        curr_price = elements[2].text.strip()
-        down_from_52w_high = elements[13].text.strip()
-        an_item = dict(stock_name=stock_name,market_cap=market_cap,curr_price=curr_price,down_from_52w_high=down_from_52w_high)
-        stocks.append(an_item)
+        if stock_name.strip() not in  blacklist:
+            market_cap = elements[3].text.strip()
+            curr_price = elements[2].text.strip()
+            down_from_52w_high = elements[13].text.strip()
+            an_item = dict(stock_name=stock_name,market_cap=market_cap,curr_price=curr_price,down_from_52w_high=down_from_52w_high)
+            stocks.append(an_item)
 
 
 BASH_CMD = 'curl -s --cookie /Users/amit/Downloads/cookies.txt ' + USA_URL + '>' + USA_WATCHLIST_LOC
@@ -73,17 +77,19 @@ for item in items:
     elements = item.findAll('td')
     tickr =elements[0].find('a').contents[0].strip()
     stock_name = elements[0].find('span').contents[0].strip()
-    stock_price = elements[1].contents[0].strip()
-    an_item = dict(stock_name=stock_name,tickr=tickr,stock_price=stock_price)
+    if stock_name not in  blacklist:
+        stock_price = elements[1].contents[0].strip()
+        an_item = dict(stock_name=stock_name,tickr=tickr,stock_price=stock_price)
 
-    if 'ETF' in stock_name:
-        etfs.append(an_item)
-    else:
-        stocks_usa.append(an_item)
+        if 'ETF' in stock_name:
+            etfs.append(an_item)
+        else:
+            stocks_usa.append(an_item)
 
     
 
-html = template.render(data1=stocks,data2=stocks_usa,data3=etfs)
+#html = template.render(data1=stocks,data2=stocks_usa,data3=etfs)
+html = template.render(data1=stocks,data2=stocks_usa)
 with open(INDEX_PAGE_LOC, 'w') as fh:
     fh.write(html)
 
