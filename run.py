@@ -78,27 +78,28 @@ for item in items:
     tickr = elements[0].find('a').contents[0].strip()
     stock_name = elements[0].find('span').contents[0].strip()
     stock_vol =  str(elements[5].contents[0].strip())
+    stock_price = elements[1].contents[0].strip()
 
-    if 'M' in stock_vol:
-        pass
-    elif 'K' in stock_vol:
-        if int(float((stock_vol.replace('K', '')))) < 300:
+    if tickr not in blacklist and float(stock_price) > 10.0:
+        if 'M' in stock_vol:
+            pass
+        elif 'K' in stock_vol:
+            if int(float((stock_vol.replace('K', '')))) < 300:
+                #print "ignored1", tickr, stock_vol
+                continue
+            else:
+                pass
+        else:
             #print "ignored1", tickr, stock_vol
             continue
-        else:
-            pass
-    else:
-        #print "ignored1", tickr, stock_vol
-        continue
 
-    if stock_name not in  blacklist:
-        stock_price = elements[1].contents[0].strip()
-        an_item = dict(stock_name=stock_name,tickr=tickr,stock_price=stock_price)
-        
-        if 'ETF' in stock_name:
-            etfs.append(an_item)
-        else:
-            stocks_usa.append(an_item)
+        if stock_name not in  blacklist:
+            an_item = dict(stock_name=stock_name,tickr=tickr,stock_price=stock_price)
+            
+            if 'ETF' in stock_name:
+                etfs.append(an_item)
+            else:
+                stocks_usa.append(an_item)
 
     
 
