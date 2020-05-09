@@ -79,8 +79,17 @@ for item in items:
     stock_name = elements[0].find('span').contents[0].strip()
     stock_vol =  str(elements[5].contents[0].strip())
     stock_price = elements[1].contents[0].strip()
+    market_cap =  elements[6].contents[0].strip()
 
-    if tickr not in blacklist and float(stock_price) > 10.0:
+    valid_market_cap = 0
+    try:
+        temp = str(market_cap)
+    except:
+        valid_market_cap = 1
+
+    if tickr not in blacklist and\
+    float(stock_price) > 10.0 and\
+    valid_market_cap == 0 and 'B' in str(market_cap):
         if 'M' in stock_vol:
             pass
         elif 'K' in stock_vol:
@@ -92,6 +101,7 @@ for item in items:
         else:
             #print "ignored1", tickr, stock_vol
             continue
+        
 
         if stock_name not in  blacklist:
             an_item = dict(stock_name=stock_name,tickr=tickr,stock_price=stock_price)
