@@ -1,2 +1,31 @@
+# India stocks
 India Grid Trust
+Adani Green
+Nestle India
+Reliance Inds
+Alembic Pharma
+Ajanta Pharma
+Biocon
+Torrent Pharma.
+Aurobindo Pharma
+Divi's Lab.
+Cipla
+Jindal Poly Film
+Sun Pharma.Inds.
+Sh. Digvijay Cem
+J B Chem & Pharm
 
+# US stocks
+ALSK
+IPOC.U
+FLWS
+ZTO
+UNFI
+ZLAB
+BILI
+MYOK
+TAL
+NVO
+
+#chinese
+pinduoduo

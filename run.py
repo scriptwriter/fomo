@@ -12,7 +12,7 @@ import sys
 # download cookies.txt using the chrome browser plugin
 CREDS='credentials.txt'
 INDIA_URL = 'https://www.screener.in/screens/157004/52-Week-Highs/'
-USA_URL = 'https://in.tradingview.com/markets/stocks-usa/highs-and-lows-52wk-high/'
+USA_URL = 'https://in.tradingview.com/markets/stocks-usa/highs-and-lows-ath/'
 WATCHLIST_LOC = '/tmp/watchlist.txt'
 USA_WATCHLIST_LOC = '/tmp/watchlist_usa.txt'
 S3_BUCKET = 'umarye.com'
@@ -76,7 +76,8 @@ else:
 for item in items:
     elements = item.findAll('td')
     tickr = elements[0].find('a').contents[0].strip()
-    stock_name = elements[0].find('span').contents[0].strip()
+    #print tickr
+    stock_name = elements[0]['title'].strip()
     stock_vol =  str(elements[5].contents[0].strip())
     stock_price = elements[1].contents[0].strip()
     market_cap =  elements[6].contents[0].strip()
