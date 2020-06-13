@@ -1,8 +1,43 @@
 # India stocks
+
+India Cements
+Nestle India
+Reliance Inds.
+HCL Technologies
+Torrent Power
+
 India Grid Trust
 Adani Green
-Nestle India
-Reliance Inds
+Jindal Poly Film
+Sh. Digvijay Cem
+Borosil Renew.
+Omaxe
+Ultramarine Pig.
+AVT Natural Prod
+L T Foods
+Infibeam Avenues
+Natl. Peroxide
+Esab India
+WABCO India
+TV18 Broadcast
+Brightcom Group
+HLE Glascoat
+Alembic
+EID Parry
+
+
+# IGNORE Indian Pharma
+Sun Pharma.Inds.
+Dr Reddy's Labs
+Sanofi India
+Syngene Intl.
+Astrazeneca Phar
+Suven Pharma
+Aarti Drugs
+J B Chem & Pharm
+Anuh Pharma
+Marksans Pharma
+Cadila Health.
 Alembic Pharma
 Ajanta Pharma
 Biocon
@@ -10,10 +45,8 @@ Torrent Pharma.
 Aurobindo Pharma
 Divi's Lab.
 Cipla
-Jindal Poly Film
-Sun Pharma.Inds.
-Sh. Digvijay Cem
-J B Chem & Pharm
+Shilpa Medicare
+
 
 # US stocks
 ALSK
@@ -26,6 +59,13 @@ BILI
 MYOK
 TAL
 NVO
+ASML
+NICE
+SPGI
+CARR
+RH
+VRT
 
 #chinese
-pinduoduo
+PDD
+GDS
