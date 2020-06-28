@@ -69,7 +69,8 @@ items = soup.findAll('tr')
 if len(items) > 0:
     items.pop(0)
 else:
-    print("Its time to download the cookies again.")
+    print("Its time to download the cookies again.\nAlready deleted old cookies.")
+    os.remove('/Users/amit/Downloads/cookies.txt')
     sys.exit(0)
 
 

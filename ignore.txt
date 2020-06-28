@@ -5,6 +5,13 @@ Nestle India
 Reliance Inds.
 HCL Technologies
 Torrent Power
+Gujarat Gas
+J K Cements
+C D S L
+
+# AUTO
+Munjal Auto Inds
+
 
 India Grid Trust
 Adani Green
@@ -24,6 +31,28 @@ Brightcom Group
 HLE Glascoat
 Alembic
 EID Parry
+Navin Fluo.Intl.
+Laurus Labs
+MOIL
+ITI
+FDC
+Swaraj Engines
+Indrapr.Medical
+Sequent Scien.
+Geojit Fin. Ser.
+
+# IT
+L & T Infotech
+TCS
+
+
+#CRAP
+Subex
+Tata Comm
+PNB Gilts
+Morepen Labs.
+NACL Industries
+Bajaj Hindusthan
 
 
 # IGNORE Indian Pharma
@@ -46,7 +75,7 @@ Aurobindo Pharma
 Divi's Lab.
 Cipla
 Shilpa Medicare
-
+Jubilant Life
 
 # US stocks
 ALSK
@@ -65,6 +94,7 @@ SPGI
 CARR
 RH
 VRT
+CCXI
 
 #chinese
 PDD
