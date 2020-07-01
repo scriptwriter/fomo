@@ -11,7 +11,7 @@ import sys
 
 # download cookies.txt using the chrome browser plugin
 CREDS='credentials.txt'
-INDIA_URL = 'https://www.screener.in/screens/157004/52-Week-Highs/'
+INDIA_URL = 'https://www.screener.in/screens/245964/All-Time-High/'
 USA_URL = 'https://in.tradingview.com/markets/stocks-usa/highs-and-lows-ath/'
 WATCHLIST_LOC = '/tmp/watchlist.txt'
 USA_WATCHLIST_LOC = '/tmp/watchlist_usa.txt'
