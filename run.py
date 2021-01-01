@@ -19,7 +19,7 @@ S3_BUCKET = 'umarye.com'
 INDEX_PAGE_LOC = '/tmp/index.html'
 
 # download watchlist data from screener passing the cookie file
-BASH_CMD = 'curl -s --cookie /Users/amit/Downloads/cookies.txt ' + INDIA_URL + '>' + WATCHLIST_LOC
+BASH_CMD = 'curl -s --cookie ~/Downloads/cookies.txt ' + INDIA_URL + '>' + WATCHLIST_LOC
 os.system(BASH_CMD)
 
 creds = ''
