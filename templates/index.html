@@ -4,6 +4,7 @@
   <table border="1" class="dataframe">
       <thead>
           <tr>
+              <th>Cnt</th>
               <th>Name</th>
               <th># Market Cap #</th>
               <th># Curr Price #</th>
@@ -13,6 +14,7 @@
       {% for stock in data1 %}
       <tbody>
           <tr>
+              <td align="left">{{stock.serial_number}}</td>
               <td align="left">{{stock.stock_name}}</td>
               <td align="center">{{stock.market_cap}}</td>
               <td align="center">{{stock.curr_price}}</td>

@@ -11,16 +11,13 @@ import sys
 
 # download cookies.txt using the chrome browser plugin
 CREDS='credentials.txt'
-INDIA_URL = 'https://www.screener.in/screens/245964/All-Time-High/'
+INDIA_URL = 'https://www.screener.in/screens/245964/All-Time-High/?page='
 USA_URL = 'https://in.tradingview.com/markets/stocks-usa/highs-and-lows-ath/'
 WATCHLIST_LOC = '/tmp/watchlist.txt'
 USA_WATCHLIST_LOC = '/tmp/watchlist_usa.txt'
 S3_BUCKET = 'umarye.com'
 INDEX_PAGE_LOC = '/tmp/index.html'
 
-# download watchlist data from screener passing the cookie file
-BASH_CMD = 'curl -s --cookie ~/Downloads/cookies.txt ' + INDIA_URL + '>' + WATCHLIST_LOC
-os.system(BASH_CMD)
 
 creds = ''
 with open(CREDS, 'r') as infile:
@@ -30,37 +27,47 @@ with open(CREDS, 'r') as infile:
 conn = boto.connect_s3(creds["access_key"], creds["secret_key"],
                        calling_format=boto.s3.connection.OrdinaryCallingFormat())
 
-
 ENV = Environment(loader=FileSystemLoader('./templates'))
 template = ENV.get_template('index.html')
 
-soup = BeautifulSoup(open(WATCHLIST_LOC), "lxml")
-items = soup.findAll('tr')
-if len(items) > 0:
-    items.pop(0)
-else:
-    print("Its time to download the cookies again.")
-    sys.exit(0)
-
-
 stocks = []
+temp = set()
+
+cnt=0
+for i in range(1,5):
+    # download watchlist data from screener passing the cookie file
+    BASH_CMD = 'curl -s --cookie ~/Downloads/cookies.txt ' + INDIA_URL + str(i) + '>' + WATCHLIST_LOC
+    os.system(BASH_CMD)
+
+    soup = BeautifulSoup(open(WATCHLIST_LOC), "lxml")
+    items = soup.findAll('tr')
+    if len(items) > 0:
+	    items.pop(0)
+    else:
+	    print("Its time to download the cookies again.")
+	    sys.exit(0)
+
+
+
+    with open('ignore.txt', 'r') as f:
+	    blacklist = f.read().splitlines() 
+
+    for item in items:
+	    elements = item.findAll('td')
+	    if len(elements) > 0:
+		    stock_name = elements[1].text.strip()
+		    if stock_name.strip() not in  blacklist and stock_name not in temp:
+			    cnt+=1
+			    market_cap = elements[3].text.strip()
+			    curr_price = elements[2].text.strip()
+			    down_from_52w_high = elements[13].text.strip()
+			    an_item = dict(serial_number=cnt,stock_name=stock_name,market_cap=market_cap,curr_price=curr_price,down_from_52w_high=down_from_52w_high)
+			    stocks.append(an_item)
+		    temp.add(stock_name)
+
+
 stocks_usa = []
 etfs = []
-
-with open('ignore.txt', 'r') as f:
-    blacklist = f.read().splitlines() 
-
-for item in items:
-    elements = item.findAll('td')
-    if len(elements) > 0:
-        stock_name = elements[1].text.strip()
-        if stock_name.strip() not in  blacklist:
-            market_cap = elements[3].text.strip()
-            curr_price = elements[2].text.strip()
-            down_from_52w_high = elements[13].text.strip()
-            an_item = dict(stock_name=stock_name,market_cap=market_cap,curr_price=curr_price,down_from_52w_high=down_from_52w_high)
-            stocks.append(an_item)
-
 
 BASH_CMD = 'curl -s --cookie /Users/amit/Downloads/cookies.txt ' + USA_URL + '>' + USA_WATCHLIST_LOC
 os.system(BASH_CMD)
